@@ -1,0 +1,16 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+<h1 class="text-center">Submit a recipe here!</h1>
+<img src="https://cdn6.dissolve.com/p/D1024_76_370/D1024_76_370_1200.jpg" width="50%" class="img-fluid mx-auto d-block rounded">
+<form action="/your-name/" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group small">
+            <div class="text-muted"> {{ field.label }} </div>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <small id="emailHelp" class="form-text text-muted">Your email will not be included publically with the recipe and is optional.</small><br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
