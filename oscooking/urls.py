@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from submit_recipe import views
+from recipes import views
 
 urlpatterns = [
-    path('submit_recipe/', include ('submit_recipe.urls')),
+    path('submit_recipe/', include ('recipes.urls')),
     path('admin/', admin.site.urls),
 ]
