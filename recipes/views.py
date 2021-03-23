@@ -21,4 +21,4 @@ def submit_recipe_view(request):
     else:
         form = RecipeForm()
 
-    return render(request, 'recipes/index.html', {'form': form})
+    return render(request, 'recipes/submit_recipe.html', {'form': form})
