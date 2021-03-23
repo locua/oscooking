@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
-        <form action="/your-name/" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit">
-        </form>
-    </body>
-</html>
+{% extends "submit_recipe/base.html" %}
+{% block content %}
+<div class="starter-template text-left py-5 px-3">
+    <form action="/your-name/" method="post">
+    <div class="form-group row">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+    </div>
+    </form>
+</div>
+{% endblock %}
