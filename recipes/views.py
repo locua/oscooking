@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import RecipeForm
-from .models import Recipe, Comment
+from .models import Recipe, Comment, Tag
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
@@ -8,7 +8,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 class IndexView(generic.ListView):
     """ Recipes index view """
     template_name='recipes/index.html'
-    context_object_name='recipe_list'
+    # context_object_name='recipe_list'
+    
+    def get_context_data(self,*args, **kwargs):
+        context = super(IndexView, self).get_context_data(*args,**kwargs)
+        context['recipe_list'] = Recipe.objects.all()
+        context['tags'] = Tag.objects.all()
+        return context
+
     def get_queryset(self):
         """Return the published recipes"""
         return Recipe.objects.filter(visible=True)
@@ -38,7 +45,7 @@ def submit_recipe_view(request):
                 description=form.cleaned_data["description"],
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
-                # tags=form.cleaned_data["tags"]
+                tags.set(form.cleaned_data["tags"])
             )
             print("saving recipe ", recipe)
             recipe.save()

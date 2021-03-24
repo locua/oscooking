@@ -1,6 +1,7 @@
 {% extends "recipes/base.html" %}
 {% block content %}
 
+<h2>Recipes:</h2>
 {% if recipe_list %}
     <ul>
         {% for recipe in recipe_list %}
@@ -9,6 +10,14 @@
     </ul>
 {% else %}
     <p> No recipes yet!</p>
+{% endif %}
+<h2>Tags</h2>
+{% if tags %}
+    <ul>
+        {% for tag in tags %}
+            <li><a href="">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
 {% endif %}
 
 {% endblock %}
