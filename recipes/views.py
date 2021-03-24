@@ -11,7 +11,7 @@ class IndexView(generic.ListView):
     context_object_name='recipe_list'
     def get_queryset(self):
         """Return the published recipes"""
-        return Recipe.objects.all()
+        return Recipe.objects.filter(visible=True)
 
 
 def detail_view(request, pk):

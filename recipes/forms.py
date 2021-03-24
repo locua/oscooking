@@ -34,6 +34,7 @@ class RecipeForm(forms.Form):
         )
     )
     email = forms.CharField(
+        required=False,
         max_length=200, 
         # label="Email",
         widget=forms.TextInput(attrs={
