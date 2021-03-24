@@ -16,7 +16,7 @@
 {% if tags %}
     <ul class="list-inline">
         {% for tag in tags %}
-            <li class="list-inline-item"><a href="">{{ tag.name }}</a></li>
+            <li class="list-inline-item"><a href="{% url 'recipes:tag' tag.id %}">{{ tag.name }}</a></li>
         {% endfor %}
     </ul>
 {% endif %}

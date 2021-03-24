@@ -3,6 +3,18 @@
 
 <h2>{{ recipe.title }}</h2>
 <div>
+    {% if recipe.tags.all %}
+    <ul class="list-inline">
+        {% for tag in recipe.tags.all %}
+            <li class="list-inline-item">
+                <a href="{{ tag }}/">
+                    {{ tag }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
     <h3>Description:</h3>
     <p>{{recipe.description}}</p>
 </div>

@@ -5,7 +5,7 @@
 {% if recipes_in_tag %}
     <ul>
         {% for recipe in recipes_in_tag %}
-            <li><a href="">{{ recipe.title }}</a></li>
+            <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
         {% endfor %}
     </ul>
 {% else %}

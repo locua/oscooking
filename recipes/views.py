@@ -12,7 +12,7 @@ class IndexView(generic.ListView):
     
     def get_context_data(self,*args, **kwargs):
         context = super(IndexView, self).get_context_data(*args,**kwargs)
-        context['recipe_list'] = Recipe.objects.all()
+        context['recipe_list'] = Recipe.objects.filter(visible=True)
         context['tags'] = Tag.objects.all()
         return context
 
@@ -80,12 +80,14 @@ def detail_view(request, recipe_slug):
     }
     return render(request, "recipes/detail.html", context)
 
-
-class TagView(generic.ListView):
-    """ Tag view. Lists all recipes with a certain tag."""
-    template_name = 'news/tag.html'
-    context_object_name = 'recipes_in_tag'
-    def get_queryset(self):
-        return Recipe.objects.filter(
-            visible=True,
-        )
+def tag_view(request, pk):
+    """ view all recipes for a given tag """
+    tag = Tag.objects.filter(pk=pk)
+    recipes=Recipe.objects.filter(
+        tags__in=tag,
+        visible=True
+    )
+    context = {
+        "recipes_in_tag": recipes,
+    }
+    return render(request, "recipes/tag.html", context)
