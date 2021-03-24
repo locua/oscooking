@@ -19,6 +19,6 @@ from django.urls import path, include
 from recipes import views
 
 urlpatterns = [
-    path('submit_recipe/', include ('recipes.urls')),
+    path('', include ('recipes.urls')),
     path('admin/', admin.site.urls),
 ]

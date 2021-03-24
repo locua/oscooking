@@ -4,9 +4,7 @@ from . import views
 
 app_name='recipes'
 urlpatterns = [
-    # ex: /news
-    path('', views.submit_recipe_view, name='submit_rec'),
-    #path('admin/', admin.sites.urls),
-    # Below path is for use with detailview class
-    # path('<int:pk>/', views.DetailView.as_view(), name='detail'), 
+    path('', views.IndexView.as_view(), name='index'),
+    path('submit/', views.submit_recipe_view, name='submit_rec'),
+    path('<int:pk>/', views.detail_view, name='detail'),
 ]

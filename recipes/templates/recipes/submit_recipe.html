@@ -1,6 +1,6 @@
 {% extends "recipes/base.html" %}
 {% block content %}
-<h1 class="text-center">Submit a recipe here!</h1>
+<h2 class="text-center">Submit a recipe here!</h2>
 <form action="/your-name/" method="post">
     {% csrf_token %}
     {% for field in form %}

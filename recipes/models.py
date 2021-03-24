@@ -27,6 +27,9 @@ class Recipe(models.Model):
 
   def __str__(self):
     return self.title
+
+  def sep_add_tags(self):
+    pass
   
 class Comment(models.Model):
   """ Comments """
