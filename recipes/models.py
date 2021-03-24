@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
+import re
 from django.utils import timezone
+from django.template.defaultfilters import slugify # new
 
 # Create your models here.
 
@@ -24,12 +26,18 @@ class Recipe(models.Model):
   link1 = models.URLField(max_length=300, blank=True)
   link2 = models.URLField(max_length=300, blank=True)
   visible = models.BooleanField(default=False)
+  recipe_slug = models.SlugField(unique=True, null=True)
+
+  def save(self, *args, **kwargs):
+        self.recipe_slug = self.recipe_slug or slugify(self.title)
+        super().save(*args, **kwargs)
 
   def __str__(self):
     return self.title
 
   def sep_add_tags(self):
     pass
+
   
 class Comment(models.Model):
   """ Comments """

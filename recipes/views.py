@@ -35,7 +35,7 @@ def submit_recipe_view(request):
 
     return render(request, 'recipes/submit_recipe.html', {'form': form})
 
-def detail_view(request, pk):
+def detail_view(request, recipe_slug):
     """ Shows recipe in full """
     # article = Article.objects.get(pk=pk)
     # form = CommentForm()
@@ -49,7 +49,7 @@ def detail_view(request, pk):
     #         )
     #         comment.save()
     # comments = Comment.objects.filter(article=article)
-    recipe=Recipe.objects.get(pk=pk)
+    recipe=Recipe.objects.get(recipe_slug=recipe_slug)
     context = {
         "recipe": recipe,
     }
