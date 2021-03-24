@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import RecipeForm
 from .models import Recipe, Comment
 from django.views import generic
+from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -16,6 +17,9 @@ class IndexView(generic.ListView):
 def detail_view(request, pk):
     pass
 
+def thanks(request):
+    return render(request, 'recipes/thanks.html')
+
 
 def submit_recipe_view(request):
     # if this is a POST request we need to process the form data
@@ -26,8 +30,23 @@ def submit_recipe_view(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            print("form is valid")
+            recipe = Recipe(
+                title=form.cleaned_data["title"],
+                author=form.cleaned_data["author"],
+                email=form.cleaned_data["email"],
+                description=form.cleaned_data["description"],
+                ingredients=form.cleaned_data["ingredients"],
+                instructions=form.cleaned_data["instructions"],
+                # tags=form.cleaned_data["tags"]
+            )
+            print("saving recipe ", recipe)
+            recipe.save()
             # redirect to a new URL:
+            print("i'm here")
             return HttpResponseRedirect('/thanks/')
+        else:
+            print("not valid")
 
     # if a GET (or any other method) we'll create a blank form
     else:
