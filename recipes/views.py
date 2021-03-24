@@ -51,6 +51,6 @@ def detail_view(request, recipe_slug):
     # comments = Comment.objects.filter(article=article)
     recipe=Recipe.objects.filter(recipe_slug=recipe_slug)
     context = {
-        "recipe": recipe,
+        "recipe": recipe[0],
     }
     return render(request, "recipes/detail.html", context)
