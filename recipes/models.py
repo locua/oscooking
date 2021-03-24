@@ -14,7 +14,7 @@ class Tag(models.Model):
 class Recipe(models.Model):
   """ Recipe """
   title = models.CharField(max_length=200)
-  author = models.CharField(max_length=100)
+  author = models.CharField(max_length=100, default="Anonymous")
   email = models.EmailField(max_length=254, blank=True)
   date_submitted = models.DateTimeField(auto_now_add=True)
   tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
