@@ -65,10 +65,11 @@ class RecipeForm(forms.Form):
     )
     tags = ModelMultipleChoiceField (
         queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple(attrs={'class':'list-inline'})
+        widget=forms.CheckboxSelectMultiple
     )
     additional_tags=forms.CharField(
         max_length=400,
+        required=False,
         label='Additional tags. Seperate with commas <i> i.e </i> <strong> fruit,vegetarian,gluten free</strong>',
         widget=forms.TextInput(attrs={
             'placeholder':'Additional tags, please seperate tags with commas.',

@@ -37,7 +37,7 @@ def submit_recipe_view(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
-            print("form is valid")
+            _tags = form.cleaned_data.get('tags')
             recipe = Recipe(
                 title=form.cleaned_data["title"],
                 author=form.cleaned_data["author"],
@@ -45,12 +45,11 @@ def submit_recipe_view(request):
                 description=form.cleaned_data["description"],
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
-                tags.set(form.cleaned_data["tags"])
             )
-            print("saving recipe ", recipe)
+            recipe.save()
+            recipe.tags.set(_tags)
             recipe.save()
             # redirect to a new URL:
-            print("i'm here")
             return HttpResponseRedirect('/thanks/')
         else:
             print("not valid")
@@ -80,3 +79,13 @@ def detail_view(request, recipe_slug):
         "recipe": recipe[0],
     }
     return render(request, "recipes/detail.html", context)
+
+
+class TagView(generic.ListView):
+    """ Tag view. Lists all recipes with a certain tag."""
+    template_name = 'news/tag.html'
+    context_object_name = 'recipes_in_tag'
+    def get_queryset(self):
+        return Recipe.objects.filter(
+            visible=True,
+        )

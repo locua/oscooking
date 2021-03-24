@@ -1,11 +1,12 @@
 {% extends "recipes/base.html" %}
 {% block content %}
+<h2>Submit a recipe <strong><a href="/submit">....here!</a></strong></h2>
 
 <h2>Recipes:</h2>
 {% if recipe_list %}
-    <ul>
+    <ul class="list-inline">
         {% for recipe in recipe_list %}
-            <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
+            <li class="list-inline-item"><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
@@ -13,9 +14,9 @@
 {% endif %}
 <h2>Tags</h2>
 {% if tags %}
-    <ul>
+    <ul class="list-inline">
         {% for tag in tags %}
-            <li><a href="">{{ tag.name }}</a></li>
+            <li class="list-inline-item"><a href="">{{ tag.name }}</a></li>
         {% endfor %}
     </ul>
 {% endif %}
