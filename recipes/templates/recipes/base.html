@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="theme-color" content="#563d7c">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 
 <body>
-<div class="text-right col-md-8 mx-auto  py-2 px-3 " >
-    <h1>Opensource.cooking <a href="/">...home</a></h1>
+<nav class=" px-4 col-md-8 mx-auto navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand " href="/">&malt; Opensource.cooking</a>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
+    <!-- <span class="navbar-toggler-icon"></span> -->
+  <!-- </button> -->
+  <div class="navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Recipes </a>
+      <a class="nav-item nav-link" href="/submit/">Submit a recipe</a>
+      <!-- <a class="nav-item nav-link" href="#">Pricing</a> -->
+      <!-- <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+    </div>
+  </div>
+</nav>
+<div style="background-color: beige;" class="text-right col-md-8 mx-auto  py-2 px-3 " >
+    <div >
+    <!-- <h1>Opensource.cooking &malt; <a href="/">...home</a></h1> -->
     {% block content %}
     {% endblock %} 
+    </div>
 </div>
 </body>
 </html>

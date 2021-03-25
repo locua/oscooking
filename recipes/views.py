@@ -80,14 +80,15 @@ def detail_view(request, recipe_slug):
     }
     return render(request, "recipes/detail.html", context)
 
-def tag_view(request, pk):
+def tag_view(request, slug):
     """ view all recipes for a given tag """
-    tag = Tag.objects.filter(pk=pk)
+    tag = Tag.objects.filter(slug=slug)
     recipes=Recipe.objects.filter(
         tags__in=tag,
         visible=True
     )
     context = {
+        "tag" : tag[0],
         "recipes_in_tag": recipes,
     }
     return render(request, "recipes/tag.html", context)

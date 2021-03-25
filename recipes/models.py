@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 import re
+import uuid
 import random, string
 from django.utils import timezone
 from django.template.defaultfilters import slugify # new
@@ -12,11 +13,16 @@ def ran_string(n):
   return ''.join(random.choice(inputset) for _ in range(n))
 
 class Tag(models.Model):
-  """ Tags """
+  """ Tag """
   name = models.CharField(max_length=100)
+  slug = models.SlugField(unique=True, default=ran_string(18))
 
   def __str__(self):
     return self.name
+  
+  def save(self, *args, **kwargs):
+    self.slug = slugify(self.name) + ran_string(5) or self.slug
+    super().save(*args, **kwargs)
 
 class Recipe(models.Model):
   """ Recipe """
@@ -34,9 +40,9 @@ class Recipe(models.Model):
   recipe_slug = models.SlugField(unique=True, default=ran_string(18))
 
   def save(self, *args, **kwargs):
-        self.recipe_slug = slugify(self.title) + ran_string(5) or self.recipe_slug 
-        print("slug is ", self.recipe_slug)
-        super().save(*args, **kwargs)
+    mySlug = ran_string(5)+slugify(self.title)+ran_string(5)
+    self.recipe_slug =  mySlug or self.recipe_slug 
+    super().save(*args, **kwargs)
 
   def __str__(self):
     return self.title

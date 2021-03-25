@@ -1,7 +1,7 @@
 {% extends "recipes/base.html" %}
 {% block content %}
 <h2 class="text-center">Submit a recipe here!</h2>
-<form action="/submit/" method="post">
+<form class="col-md-8 mx-auto" action="/submit/" method="post">
     {% csrf_token %}
     {% for field in form %}
         <div class="form-group small">
@@ -10,7 +10,7 @@
         </div>
         {% endfor %}
         <small id="emailHelp" class="form-text text-muted">Your email will not be included publically with the recipe and is optional.</small><br>
-    <input type="submit" value="Submit" class="">
-</form>
+    <input class="form-group small" type="submit" value="Submit" class="">
 <img src="https://cdn6.dissolve.com/p/D1024_76_370/D1024_76_370_1200.jpg" width="50%" class="img-fluid mx-auto d-block rounded">
+</form>
 {% endblock %}
