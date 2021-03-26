@@ -1,6 +1,6 @@
 {% extends "recipes/base.html" %}
 {% block content %}
-<p style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
+<p class="st" style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
 <hr>
 <h2>{{ recipe.title|title }}</h2>
 <p style="text-align: center;">by <i>{{ recipe.author }}, </i> added on <i>{{recipe.date_submitted}}</i></p>
@@ -15,8 +15,8 @@
         <h3>Description:</h3>
         <p>{{recipe.description}}</p>
         <h3>Ingredients:</h3>
-        <p>{{ recipe.ingredients|linebreaks }}</p>
+        <div>{{ recipe.ingredients|linebreaks }}</div>
         <h3>Instructions:</h3>
-        <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
-<!-- <p> See all recipes <a href="/">here.</a></p> -->
+        <div>{{ recipe.instructions|linenumbers|linebreaks }}</div>
+<p style="text-align: center;"> See all recipes <a href="/">here.</a></p>
 {% endblock %}

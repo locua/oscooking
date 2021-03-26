@@ -3,6 +3,7 @@ from .forms import RecipeForm
 from .models import Recipe, Comment, Tag
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
+from ipware import get_client_ip
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -49,7 +50,8 @@ def submit_recipe_view(request):
             )
             # print(type(_tags))
             recipe.save()
-            split_tags = additional_tags.split(",")
+            split_tags = list(filter(None, additional_tags.split(",")))
+            print(split_tags)
             for t in split_tags:
                 tag = Tag(name=t) 
                 tag.save()
@@ -82,6 +84,8 @@ def detail_view(request, recipe_slug):
     #         comment.save()
     # comments = Comment.objects.filter(article=article)
     recipe=Recipe.objects.filter(recipe_slug=recipe_slug)
+    ip1 = get_client_ip(request)
+    print(ip1)
     context = {
         "recipe": recipe[0],
     }
