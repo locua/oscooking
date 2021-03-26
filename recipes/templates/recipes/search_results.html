@@ -1,0 +1,11 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+<h1>Search Results</h1>
+<ul>
+  {% for recipe in object_list %}
+    <li>
+      {{ recipe.title }}, {{ recipe.date_submitted }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

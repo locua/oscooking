@@ -5,6 +5,7 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from ipware import get_client_ip
 from itertools import chain
+from django.db.models import Q
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -104,3 +105,16 @@ def tag_view(request, slug):
         "recipes_in_tag": recipes,
     }
     return render(request, "recipes/tag.html", context)
+
+class SearchResultsView(generic.ListView):
+    model = Recipe
+    template_name = 'recipes/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Recipe.objects.filter(
+            Q(visible=True),
+            Q(ingredients__icontains=query) | 
+            Q(instructions__icontains=query) |
+            Q(title__icontains=query)
+        )

@@ -7,20 +7,6 @@
 
 <p class="st" style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
 <hr>
-<h2 style="text-align: center; ">Recipes:</h2>
-{% if recipe_list %}
-    <ul style="column-count: 3;column-max-width:10em;">
-        {% for recipe in recipe_list %}
-            <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
-        {% endfor %}
-        {% for a in "aaaaaa" %}
-            <li><a href="/">{{ a }}kfjladjflasj</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p> No recipes yet!</p>
-{% endif %}
-<hr>
 {% if tags %}
     <h2 style="text-align:center;">Tags:</h2>
     <p style="text-align: center;"> 
@@ -28,6 +14,29 @@
             <a href="{% url 'recipes:tag' tag.slug %}"><i>{{ tag.name }}</i></a>&nbsp;&nbsp;
         {% endfor %}
     </p>
+<hr>
+<h2 style="text-align: center; ">Recipes:</h2>
+{% if recipe_list %}
+    <ul id=recipes>
+        {% for recipe in recipe_list %}
+            <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title |title}}</a></li>
+        {% endfor %}
+        <!-- {% for a in "aaaaaa" %} -->
+            <!-- <li><a href="/">{{ a }}kfjladjflasj</a></li> -->
+        <!-- {% endfor %} -->
+    </ul>
+{% else %}
+    <p> No recipes yet!</p>
+{% endif %}
+
+<hr>
+<h2> Search site...</h2>
+<div style="text-align:center">
+<form action="{% url 'recipes:search_results' %}" method="get">
+  <input  name="q" type="text" placeholder="Search...">
+</form>
 <br>
+</div>
+<!-- <br> -->
 {% endif %}
 {% endblock %}

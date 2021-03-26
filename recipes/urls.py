@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
 from . import views
+from .views import SearchResultsView
 
 app_name='recipes'
 urlpatterns = [
@@ -9,4 +10,5 @@ urlpatterns = [
     path('thanks/', views.thanks, name='thanks'),
     path('recipes/<slug:recipe_slug>/', views.detail_view, name='detail'),
     path('tags/<slug:slug>/', views.tag_view, name='tag'),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
 ]
