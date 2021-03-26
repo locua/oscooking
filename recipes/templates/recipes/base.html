@@ -3,15 +3,22 @@
 <head>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Spectral&display=swap');
-  body {
+
+html {
+	max-width: 100%;
+	font-size: 100%;
+}
+
+body {
 	background: #F5F5DC;
 	color: black ;
-	max-width: 800px ;
-	margin: auto ;
+	max-width: 40em ;
+	margin: auto;
 	padding: 0 16px ;
-	margin-bottom: 500px;
+	margin-bottom: 20em;
         /*font-family: sans-serif;*/
 	font-family: 'Spectral', serif ;
+	font-size: 1em;
 }
 input:invalid {
   border-color: red;
@@ -37,7 +44,11 @@ h1 a:visited {
   text-decoration: none;
 }
 ul {
-  column-count: 4;
+	column-count: 2;
+ 	list-style-type: none;
+}
+li {
+	inline-block;
 }
 
 input {
@@ -52,6 +63,7 @@ a:visited {
 }
 
 h1 {
+	font-size: 2em;
   text-align: center ;
   line-height: 0.7;
   font-family: 'Spectral', serif;
@@ -77,6 +89,9 @@ img {
 	display: block ;
 }
 
+li {
+  /* font-size:30; */
+}
 code {
 	overflow-wrap: break-word ;
 	color: lime ;
@@ -100,9 +115,15 @@ code {
 		color: forestgreen ;
 	}
 }*/
+hr {
+  color:black;
+}
 
 #formlist {
   column-count: 4; 
+}
+p {
+  font-family: serif;
 }
 
 @media print {
@@ -122,12 +143,11 @@ code {
 
 </style>
 </head>
-
 <body>
   <div class="banner">
     <h1><a href="/">Opensource.cooking</a></h1>
-    <p class="st" style="text-align: center;">A diabolically simple site for finding and sharing recipes</p>
-    <h3 style="text-align: center;">🌰</h3>
+    <p class="st" style="text-align: center;">A diabolically simple site for finding and sharing recipes...</p>
+    <h3 style="text-align: center;">🌰 🍇 🍏 🥔 🥩</h3>
   </div>
 <div class="container-fluid col-md-8" >
 <div class="px-3 py-3" >
@@ -136,7 +156,8 @@ code {
 </div>
 <hr>
 <footer>
- donate!
+ donate! | contact@opensource.cooking 
 </footer>
+<p style="text-align: center;"> * </p>
 </body>
 </html>

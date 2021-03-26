@@ -4,6 +4,7 @@ from .models import Recipe, Comment, Tag
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from ipware import get_client_ip
+from itertools import chain
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -37,8 +38,7 @@ def submit_recipe_view(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
-            _tags = form.cleaned_data.get('tags')
+            tags = form.cleaned_data.get('tags')
             additional_tags = form.cleaned_data["additional_tags"]
             recipe = Recipe(
                 title=form.cleaned_data["title"],
@@ -48,15 +48,16 @@ def submit_recipe_view(request):
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
             )
-            # print(type(_tags))
             recipe.save()
+            # Add additional tags
             split_tags = list(filter(None, additional_tags.split(",")))
-            print(split_tags)
             for t in split_tags:
                 tag = Tag(name=t) 
                 tag.save()
-                recipe.tags.set(_tags)
-            recipe.tags.set(_tags)
+                recipe.tags.add(tag)
+            # add existing tags
+            for t in tags:
+                recipe.tags.add(t)
             recipe.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')

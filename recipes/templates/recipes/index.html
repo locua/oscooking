@@ -9,9 +9,12 @@
 <hr>
 <h2 style="text-align: center; ">Recipes:</h2>
 {% if recipe_list %}
-    <ul style="column-count: 3;">
+    <ul style="column-count: 3;column-max-width:10em;">
         {% for recipe in recipe_list %}
             <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
+        {% endfor %}
+        {% for a in "aaaaaa" %}
+            <li><a href="/">{{ a }}kfjladjflasj</a></li>
         {% endfor %}
     </ul>
 {% else %}

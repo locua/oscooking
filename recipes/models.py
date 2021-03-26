@@ -44,6 +44,12 @@ class Recipe(models.Model):
   def save(self, *args, **kwargs):
     mySlug = ran_string(5)+slugify(self.title)+ran_string(5)
     self.recipe_slug =  mySlug or self.recipe_slug 
+    # Make any hidden tags visible if Recipe is visible
+    if self.visible:
+      for t in self.tags.all():
+        if t.visible==False:
+          t.visible=True
+          t.save()
     super().save(*args, **kwargs)
 
   def __str__(self):

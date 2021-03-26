@@ -15,9 +15,10 @@ class RecipeForm(forms.Form):
         )
     )
     author = forms.CharField(
-        max_length=200, 
+        max_length=200,
+        required=False,
         widget=forms.TextInput(attrs={
-            'placeholder':'Authors name', 
+            'placeholder':'Authors name. Is Anonymous if left blank', 
             'class': 'form-control'}
         )
     )
@@ -53,7 +54,7 @@ class RecipeForm(forms.Form):
     )
     tags = ModelMultipleChoiceField (
         required=False,
-        queryset=Tag.objects.all(),
+        queryset=Tag.objects.filter(visible=True),
         widget=forms.CheckboxSelectMultiple
     )
     additional_tags=forms.CharField(

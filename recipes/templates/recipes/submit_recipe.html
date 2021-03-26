@@ -6,7 +6,7 @@
     {% csrf_token %}
     {% for field in form %}
         <p> {{ field.label | safe }} </p>
-        <div style="display:-webkit-flex">
+        <div id=formlist style="display:-webkit-flex">
             {{ field }}
         </div>
         {% endfor %}
@@ -16,7 +16,5 @@
         <div style="text-align: center;">
         <input type="submit" value="Submit">
     </div>
-</form>
-<br>
-<!-- <img src="https://cdn6.dissolve.com/p/D1024_76_370/D1024_76_370_1200.jpg" width="50%" class="img-fluid mx-auto d-block rounded"> -->
+</form><br>
 {% endblock %}

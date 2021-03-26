@@ -1,7 +1,8 @@
 {% extends "recipes/base.html" %}
 {% block content %}
+<p class="st" style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
 <hr>
-<h2>{{ tag }}</h2>
+<h2>{{ tag|title}}</h2>
 {% if recipes_in_tag %}
     <ul id=artlist>
         {% for recipe in recipes_in_tag %}
