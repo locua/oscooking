@@ -40,18 +40,19 @@ class RecipeForm(forms.Form):
     ingredients = forms.CharField(
         max_length=200, 
         widget=forms.Textarea(attrs={
-            'placeholder':'Ingredient list for the recipe. Please include a quantity and ingredient on each line.',
+            'placeholder':'Ingredient list for the recipe. Please include a quantity and ingredient/s on each line.',
             'class':'form-control'}
         )
     )
     instructions = forms.CharField(
         max_length=200, 
         widget=forms.Textarea(attrs={
-            'placeholder':'Short list of instructions. Each instruction should begin with a number and a period. For example 1.',
+            'placeholder':'Short list of instructions. Put each instruction on a new line and it will be numbererd automatically.',
             'class':'form-control'}
         )
     )
     tags = ModelMultipleChoiceField (
+        required=False,
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple
     )

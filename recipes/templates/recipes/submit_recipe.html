@@ -1,16 +1,22 @@
 {% extends "recipes/base.html" %}
 {% block content %}
-<h2 class="text-center">Submit a recipe here!</h2>
-<form class="col-md-8 mx-auto" action="/submit/" method="post">
+<hr><h2>Submit a recipe</h2>
+<p style="text-align: center;">Recipes will be reviewed and added.</p>
+<form action="/submit/" method="post">
     {% csrf_token %}
     {% for field in form %}
-        <div class="form-group small">
-            <div class="text-muted"> {{ field.label | safe }} </div>
+        <p> {{ field.label | safe }} </p>
+        <div style="display:-webkit-flex">
             {{ field }}
         </div>
         {% endfor %}
-        <small id="emailHelp" class="form-text text-muted">Your email will not be included publically with the recipe and is optional.</small><br>
-    <input class="form-group small" type="submit" value="Submit" class="">
-<img src="https://cdn6.dissolve.com/p/D1024_76_370/D1024_76_370_1200.jpg" width="50%" class="img-fluid mx-auto d-block rounded">
+<br>
+        <p id="emailHelp" style="text-align: center;" ><small>Your email will not be included publically with the recipe and is optional.</small></p>
+        <br>
+        <div style="text-align: center;">
+        <input type="submit" value="Submit">
+    </div>
 </form>
+<br>
+<!-- <img src="https://cdn6.dissolve.com/p/D1024_76_370/D1024_76_370_1200.jpg" width="50%" class="img-fluid mx-auto d-block rounded"> -->
 {% endblock %}

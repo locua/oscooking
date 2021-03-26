@@ -1,8 +1,9 @@
-from django.db import models
-import datetime
 import re
 import uuid
+import datetime
 import random, string
+
+from django.db import models
 from django.utils import timezone
 from django.template.defaultfilters import slugify # new
 
@@ -15,6 +16,7 @@ def ran_string(n):
 class Tag(models.Model):
   """ Tag """
   name = models.CharField(max_length=100)
+  visible = models.BooleanField(default=False)
   slug = models.SlugField(unique=True, default=ran_string(18))
 
   def __str__(self):

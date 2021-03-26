@@ -1,33 +1,22 @@
 {% extends "recipes/base.html" %}
 {% block content %}
-
-<h2>{{ recipe.title }}</h2>
-<p>by {{ recipe.author }}</p>
+<p style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
+<hr>
+<h2>{{ recipe.title|title }}</h2>
+<p style="text-align: center;">by <i>{{ recipe.author }}, </i> added on <i>{{recipe.date_submitted}}</i></p>
 <div>
     {% if recipe.tags.all %}
-    <ul class="list-inline">
+    <div style="text-align: center;">
         {% for tag in recipe.tags.all %}
-            <li class="list-inline-item">
-                <a href="{% url 'recipes:tag' tag.slug %}">
-                    {{ tag }}
-                </a>
-            </li>
+            <a href="{% url 'recipes:tag' tag.slug %}">{{ tag }}</a> &nbsp;&nbsp;
         {% endfor %}
     {% endif %}
-</div>
-<div class="row">
-    <div class="col">
+    </div>
         <h3>Description:</h3>
         <p>{{recipe.description}}</p>
-    </div>
-    <div class="col">
         <h3>Ingredients:</h3>
-        <p>{{recipe.ingredients}}</p>
-    </div>
-    <div class="col">
+        <p>{{ recipe.ingredients|linebreaks }}</p>
         <h3>Instructions:</h3>
-        <p>{{recipe.instructions}}</p>
-    </div>
-</div>
-
+        <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
+<!-- <p> See all recipes <a href="/">here.</a></p> -->
 {% endblock %}

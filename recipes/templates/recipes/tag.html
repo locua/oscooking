@@ -1,9 +1,9 @@
 {% extends "recipes/base.html" %}
 {% block content %}
-
-<h2>Recipes with tag: {{ tag }}</h2>
+<hr>
+<h2>{{ tag }}</h2>
 {% if recipes_in_tag %}
-    <ul>
+    <ul id=artlist>
         {% for recipe in recipes_in_tag %}
             <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title }}</a></li>
         {% endfor %}
@@ -12,4 +12,5 @@
     <p> No recipes yet for this tag!</p>
 {% endif %}
 
+<p style="text-align: center;"> See all recipes <a href="/">here.</a></p>
 {% endblock %}

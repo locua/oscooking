@@ -13,7 +13,7 @@ class IndexView(generic.ListView):
     def get_context_data(self,*args, **kwargs):
         context = super(IndexView, self).get_context_data(*args,**kwargs)
         context['recipe_list'] = Recipe.objects.filter(visible=True)
-        context['tags'] = Tag.objects.all()
+        context['tags'] = Tag.objects.filter(visible=True)
         return context
 
     def get_queryset(self):
@@ -38,6 +38,7 @@ def submit_recipe_view(request):
             # process the data in form.cleaned_data as required
             # ...
             _tags = form.cleaned_data.get('tags')
+            additional_tags = form.cleaned_data["additional_tags"]
             recipe = Recipe(
                 title=form.cleaned_data["title"],
                 author=form.cleaned_data["author"],
@@ -46,7 +47,13 @@ def submit_recipe_view(request):
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
             )
+            # print(type(_tags))
             recipe.save()
+            split_tags = additional_tags.split(",")
+            for t in split_tags:
+                tag = Tag(name=t) 
+                tag.save()
+                recipe.tags.set(_tags)
             recipe.tags.set(_tags)
             recipe.save()
             # redirect to a new URL:
@@ -82,7 +89,7 @@ def detail_view(request, recipe_slug):
 
 def tag_view(request, slug):
     """ view all recipes for a given tag """
-    tag = Tag.objects.filter(slug=slug)
+    tag = Tag.objects.filter(slug=slug, visible=True)
     recipes=Recipe.objects.filter(
         tags__in=tag,
         visible=True
