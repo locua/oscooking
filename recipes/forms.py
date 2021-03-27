@@ -66,3 +66,6 @@ class RecipeForm(forms.Form):
             'class':'form-control'}
         )
     )
+
+    from hcaptcha.fields import hCaptchaField
+    hcaptcha_field=hCaptchaField()
