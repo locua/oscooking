@@ -1,0 +1,17 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+<hr>
+<h2 style="text-align: center; ">All recipes:</h2>
+{% if recipe_list %}
+    <ul id=recipes>
+        {% for recipe in recipe_list %}
+            <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title |title}}</a></li>
+        {% endfor %}
+    </ul>
+<hr>
+{% else %}
+    <p> No recipes yet!</p>
+{% endif %}
+<p style="text-align: center;"> Back to <a href="/">index</a>.</p>
+{% endblock %}
+

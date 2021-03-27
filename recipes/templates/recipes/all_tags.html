@@ -1,0 +1,14 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+{% if tags %}
+<hr>
+    <h2 class="title-hr" style="text-align:center;">All Tags:</h2>
+    <p style="font-family:sans-serif; text-align: center;"> 
+        {% for tag in tags %}
+            <a href="{% url 'recipes:tag' tag.slug %}"><i>{{ tag.name |title}}</i></a>&nbsp;&nbsp;
+        {% endfor %}
+    </p>
+<hr>
+{% endif %}
+<p style="text-align: center;"> Back to <a href="/">index</a>.</p>
+{% endblock %}
