@@ -5,25 +5,29 @@
 <!-- {% load static %} -->
 <!-- <img src="{% static 'recipes/ajvar.webp' %}" alt="" class="img-fluid mx-auto d-block rounded"> -->
 
-<p class="st" style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p>
-<hr>
+<!-- <p class="st" style="text-align: center;">Submit a recipe <a href="/submit/">here</a></p> -->
+<h2 style="text-align: center;">Submit a recipe <a href="/submit/">here</a></h2>
 {% if tags %}
-    <h2 style="text-align:center;">Tags:</h2>
+<hr>
+    <h2 class="title-hr" style="text-align:center;">Tags:</h2>
     <p style="font-family:sans-serif; text-align: center;"> 
         {% for tag in tags %}
             <a href="{% url 'recipes:tag' tag.slug %}"><i>{{ tag.name |title}}</i></a>&nbsp;&nbsp;
         {% endfor %}
+
+        <a href="/alltags">see all...</a>
     </p>
 <hr>
+{% endif %}
 <h2 style="text-align: center; ">Recipes:</h2>
+<!-- <h2 class="title-hr" style="text-align:center;"><hr/>Recipes:<hr/></h2> -->
+
 {% if recipe_list %}
     <ul id=recipes>
         {% for recipe in recipe_list %}
             <li><a href="{% url 'recipes:detail' recipe.recipe_slug %}">{{ recipe.title |title}}</a></li>
         {% endfor %}
-        <!-- {% for a in "aaaaaa" %} -->
-            <!-- <li><a href="/">{{ a }}kfjladjflasj</a></li> -->
-        <!-- {% endfor %} -->
+        <li><a href="/allrecipes">see all...</a></li>
     </ul>
 {% else %}
     <p> No recipes yet!</p>
@@ -36,7 +40,16 @@
   <input  name="q" type="text" placeholder="Search...">
 </form>
 <br>
+</div><hr>
+<div class="footer1" style="">
+    <div style="text-align: center; float: left;">
+        <h2>Donate:</h2>
+        <p>Donate for the upkeep of this site: <a href="/donate" >here</a></p>
+    </div>
+    <div style="text-align: center; float: right;">
+        <h2>Contact:</h2>
+        <p>Contact the maintainers of this site at: <a href="mailto:contact@opensource.cooking">contact@opensource.cooking</a> </p>
+    </div>
 </div>
-<!-- <br> -->
-{% endif %}
+<hr>
 {% endblock %}

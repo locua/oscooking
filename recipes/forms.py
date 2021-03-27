@@ -38,6 +38,8 @@ class RecipeForm(forms.Form):
             'class': 'form-control'}
         )
     )
+    cooking_time = forms.IntegerField()
+
     ingredients = forms.CharField(
         # max_length=200, 
         widget=forms.Textarea(attrs={
@@ -60,7 +62,7 @@ class RecipeForm(forms.Form):
     additional_tags=forms.CharField(
         max_length=400,
         required=False,
-        label='Additional tags. Seperate with commas <i> i.e </i> <strong> fruit,vegetarian,gluten free</strong>',
+        label='Optional: Additional tags. Seperate with commas <i> i.e </i> <strong> fruit,vegetarian,gluten free</strong>',
         widget=forms.TextInput(attrs={
             'placeholder':'Additional tags, please seperate tags with commas.',
             'class':'form-control'}

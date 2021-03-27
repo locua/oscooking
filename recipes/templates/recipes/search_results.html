@@ -3,10 +3,24 @@
 <hr>
 <h1>Search Results</h1>
 <ul style="columns: 1;">
+{% if object_list %}
   {% for recipe in object_list %}
     <li>
       <a href="{% url 'recipes:detail' recipe.recipe_slug %}"> {{recipe.title }}</a>, {{ recipe.date_submitted }}
     </li>
   {% endfor %}
+{% else %}
+
+<p style="text-align: center;"> No results...</p>
+
+<!-- <hr> -->
+<h2> Search again...</h2>
+<div style="text-align:center">
+<form action="{% url 'recipes:search_results' %}" method="get">
+  <input  name="q" type="text" placeholder="Search...">
+</form>
+<br>
+{% endif %}
 </ul>
+<hr>
 {% endblock %}

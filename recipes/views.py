@@ -14,12 +14,26 @@ class IndexView(generic.ListView):
     template_name='recipes/index.html'
     # context_object_name='recipe_list'
     from django.core.mail import send_mail
-
-
     
     def get_context_data(self,*args, **kwargs):
         context = super(IndexView, self).get_context_data(*args,**kwargs)
-        context['recipe_list'] = Recipe.objects.filter(visible=True)
+        context['recipe_list'] = Recipe.objects.filter(visible=True)[:33]
+        context['tags'] = Tag.objects.filter(visible=True)[:40]
+        return context
+
+    def get_queryset(self):
+        """Return the published recipes"""
+        return Recipe.objects.filter(visible=True)
+
+class AllTagView(generic.ListView):
+    """ All tags view """
+    template_name='recipes/all_tags.html'
+    # context_object_name='recipe_list'
+    from django.core.mail import send_mail
+    
+    def get_context_data(self,*args, **kwargs):
+        context = super(AllTagView, self).get_context_data(*args,**kwargs)
+        # context['recipe_list'] = Recipe.objects.filter(visible=True)
         context['tags'] = Tag.objects.filter(visible=True)
         return context
 
@@ -27,9 +41,27 @@ class IndexView(generic.ListView):
         """Return the published recipes"""
         return Recipe.objects.filter(visible=True)
 
+class AllRecipeView(generic.ListView):
+    """ All recipes view """
+    template_name='recipes/all_recipes.html'
+    # context_object_name='recipe_list'
+    from django.core.mail import send_mail
+    
+    def get_context_data(self,*args, **kwargs):
+        context = super(AllRecipeView, self).get_context_data(*args,**kwargs)
+        context['recipe_list'] = Recipe.objects.filter(visible=True)
+        # context['tags'] = Tag.objects.filter(visible=True)
+        return context
 
-def detail_view(request, pk):
-    pass
+    def get_queryset(self):
+        """Return the published recipes"""
+        return Recipe.objects.filter(visible=True)
+
+def donate_view(request):
+    return render(request, 'recipes/donate.html')
+
+def donate_thanks_view(request):
+    return render(request, 'recipes/donationthanks.html')
 
 def thanks(request):
     return render(request, 'recipes/thanks.html')
@@ -68,6 +100,7 @@ def submit_recipe_view(request):
                 description=form.cleaned_data["description"],
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
+                cooking_time=form.cleaned_data["cooking_time"],
             )
             send_recipe_as_email(recipe)
             recipe.save()
@@ -105,7 +138,7 @@ def detail_view(request, recipe_slug):
     #             article=article
     #         )
     #         comment.save()
-    # comments = Comment.objects.filter(article=article)
+    # commgoogle analytics how toents = Comment.objects.filter(article=article)
     recipe=Recipe.objects.filter(recipe_slug=recipe_slug)
     ip1 = get_client_ip(request)
     print(ip1)
