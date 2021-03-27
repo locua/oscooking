@@ -42,6 +42,7 @@ class Recipe(models.Model):
   recipe_slug = models.SlugField(unique=True, default=ran_string(18))
 
   def save(self, *args, **kwargs):
+    # create slug from title
     mySlug = ran_string(5)+slugify(self.title)+ran_string(5)
     self.recipe_slug =  mySlug or self.recipe_slug 
     # Make any hidden tags visible if Recipe is visible

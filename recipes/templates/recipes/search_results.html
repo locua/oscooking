@@ -1,10 +1,11 @@
 {% extends "recipes/base.html" %}
 {% block content %}
+<hr>
 <h1>Search Results</h1>
-<ul>
+<ul style="columns: 1;">
   {% for recipe in object_list %}
     <li>
-      {{ recipe.title }}, {{ recipe.date_submitted }}
+      <a href="{% url 'recipes:detail' recipe.recipe_slug %}"> {{recipe.title }}, {{ recipe.date_submitted }}</a>
     </li>
   {% endfor %}
 </ul>

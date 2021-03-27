@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import RecipeForm
 from .models import Recipe, Comment, Tag
 from django.views import generic
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from ipware import get_client_ip
 from itertools import chain
@@ -12,6 +13,9 @@ class IndexView(generic.ListView):
     """ Recipes index view """
     template_name='recipes/index.html'
     # context_object_name='recipe_list'
+    from django.core.mail import send_mail
+
+
     
     def get_context_data(self,*args, **kwargs):
         context = super(IndexView, self).get_context_data(*args,**kwargs)
@@ -29,6 +33,22 @@ def detail_view(request, pk):
 
 def thanks(request):
     return render(request, 'recipes/thanks.html')
+
+def send_recipe_as_email(recipe):
+    # Create message
+    message = (recipe.title + 
+                "\n by " + recipe.author + "\n---DESCRIPTION:-\n"+
+                recipe.description + "\n---INGREDIENTS:-\n" + 
+                recipe.ingredients + "\n---METHOD:-\n" + 
+                recipe.instructions)
+    # Send email
+    send_mail(
+        'OSCooking: New recipe by ' + recipe.author,
+        message,
+        'ljame002@gold.ac.uk',
+        ['hi@louisjames.net'],
+        fail_silently=False,
+    )
 
 
 def submit_recipe_view(request):
@@ -49,11 +69,12 @@ def submit_recipe_view(request):
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
             )
+            send_recipe_as_email(recipe)
             recipe.save()
             # Add additional tags
             split_tags = list(filter(None, additional_tags.split(",")))
             for t in split_tags:
-                tag = Tag(name=t) 
+                tag = Tag(name=t.capitalize()) 
                 tag.save()
                 recipe.tags.add(tag)
             # add existing tags
@@ -114,6 +135,7 @@ class SearchResultsView(generic.ListView):
         query = self.request.GET.get('q')
         return Recipe.objects.filter(
             Q(visible=True),
+            Q(description__icontains=query) | 
             Q(ingredients__icontains=query) | 
             Q(instructions__icontains=query) |
             Q(title__icontains=query)

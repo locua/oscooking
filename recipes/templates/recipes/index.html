@@ -9,9 +9,9 @@
 <hr>
 {% if tags %}
     <h2 style="text-align:center;">Tags:</h2>
-    <p style="text-align: center;"> 
+    <p style="font-family:sans-serif; text-align: center;"> 
         {% for tag in tags %}
-            <a href="{% url 'recipes:tag' tag.slug %}"><i>{{ tag.name }}</i></a>&nbsp;&nbsp;
+            <a href="{% url 'recipes:tag' tag.slug %}"><i>{{ tag.name |title}}</i></a>&nbsp;&nbsp;
         {% endfor %}
     </p>
 <hr>
@@ -30,7 +30,7 @@
 {% endif %}
 
 <hr>
-<h2> Search site...</h2>
+<h2> Search recipes...</h2>
 <div style="text-align:center">
 <form action="{% url 'recipes:search_results' %}" method="get">
   <input  name="q" type="text" placeholder="Search...">
