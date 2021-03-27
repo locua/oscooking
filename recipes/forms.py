@@ -39,14 +39,14 @@ class RecipeForm(forms.Form):
         )
     )
     ingredients = forms.CharField(
-        max_length=200, 
+        # max_length=200, 
         widget=forms.Textarea(attrs={
             'placeholder':'Ingredient list for the recipe. Please include a quantity and ingredient/s on each line.',
             'class':'form-control'}
         )
     )
     instructions = forms.CharField(
-        max_length=200, 
+        # max_length=200, 
         widget=forms.Textarea(attrs={
             'placeholder':'Short list of instructions. Put each instruction on a new line and it will be numbererd automatically.',
             'class':'form-control'}

@@ -5,7 +5,7 @@
 <ul style="columns: 1;">
   {% for recipe in object_list %}
     <li>
-      <a href="{% url 'recipes:detail' recipe.recipe_slug %}"> {{recipe.title }}, {{ recipe.date_submitted }}</a>
+      <a href="{% url 'recipes:detail' recipe.recipe_slug %}"> {{recipe.title }}</a>, {{ recipe.date_submitted }}
     </li>
   {% endfor %}
 </ul>
