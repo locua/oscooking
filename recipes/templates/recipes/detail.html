@@ -12,6 +12,8 @@
         {% endfor %}
     {% endif %}
     </div>
+    <br>
+
     <h3>Description:</h3>
     <p>{{recipe.description}}</p>
     <h3>Time:</h3>
@@ -23,6 +25,10 @@
     <p>{{ recipe.ingredients|linebreaks }}</p>
     <h3>Instructions:</h3>
     <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
+    {% if recipe.image %}
+    <img style="max-height: 40em;width:auto" src="{{recipe.image.url}}">
+    <br>
+    {% endif %}
     <hr>
     <p style="text-align: center;"> Back to <a href="/">index</a>.</p>
 {% endblock %}

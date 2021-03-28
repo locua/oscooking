@@ -60,11 +60,17 @@ class Recipe(models.Model):
           t.save()
     super().save(*args, **kwargs)
 
+
+  def delete(self, *args, **kwargs):
+    
+    storage, path = self.image.storage, self.image.path
+    # Delete the instance before the file
+    super(Recipe, self).delete(*args, **kwargs)
+    # Delete the image after the model
+    storage.delete(path)
+
   def __str__(self):
     return self.title
-
-  def sep_add_tags(self):
-    pass
 
   
 class Comment(models.Model):

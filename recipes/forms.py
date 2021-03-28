@@ -75,7 +75,7 @@ class RecipeForm(forms.Form):
     )
     image = forms.ImageField(
         label="Optionally upload an image of the recipe...",
-        # required=False
+        required=False
     )
 
     # from hcaptcha.fields import hCaptchaField

@@ -7,6 +7,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from ipware import get_client_ip
 from itertools import chain
 from django.db.models import Q
+from io import BytesIO
+from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import re
 # Create your views here.
 
 class IndexView(generic.ListView):
@@ -82,6 +86,18 @@ def send_recipe_as_email(recipe):
         fail_silently=False,
     )
 
+def convert_to_webp(img):
+    i = Image.open(img)
+    i = i.convert('RGB')
+    thumb_io = BytesIO()
+    i.save(thumb_io, format="webp", quality=80)
+    # remove file type from ending for saving
+    img_name = re.match(r"(^.{1,})\..{1,}$", img.name).group(1)
+    # get file from memory and add to model
+    file_in_mem = InMemoryUploadedFile(thumb_io, None, img_name+'.webp', \
+    'image/webp', thumb_io.tell(), None)
+    return file_in_mem   
+
 
 def submit_recipe_view(request):
     # if this is a POST request we need to process the form data
@@ -103,8 +119,12 @@ def submit_recipe_view(request):
                 instructions=form.cleaned_data["instructions"],
                 cooking_time=form.cleaned_data["cooking_time"],
                 prep_time=form.cleaned_data["prep_time"],
-                image=form.cleaned_data["image"],
+                # image=form.cleaned_data["image"],
             )
+            # convert image to webp and store
+            img = request.FILES.get("image")
+            recipe.image = convert_to_webp(img)
+
             send_recipe_as_email(recipe)
             recipe.save()
             # Add additional tags
