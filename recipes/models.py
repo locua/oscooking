@@ -34,13 +34,15 @@ class Recipe(models.Model):
   date_submitted = models.DateTimeField(auto_now_add=True)
   tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
   description = models.TextField(max_length=200, default=None)
-  cooking_time = models.IntegerField(default=10)
+  cooking_time = models.IntegerField(default=0)
+  prep_time = models.IntegerField(default=0)
   ingredients = models.TextField()
   instructions = models.TextField()
   link1 = models.URLField(max_length=300, blank=True)
   link2 = models.URLField(max_length=300, blank=True)
   visible = models.BooleanField(default=False)
   recipe_slug = models.SlugField(unique=True, default=ran_string(18))
+  image = models.ImageField(upload_to='uploads/', blank=True)
 
   def save(self, *args, **kwargs):
     # create slug from title

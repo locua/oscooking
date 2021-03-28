@@ -77,7 +77,7 @@ def send_recipe_as_email(recipe):
     send_mail(
         'OSCooking: New recipe by ' + recipe.author,
         message,
-        'ljame002@gold.ac.uk',
+        'contact@opensource.cooking',
         ['hi@louisjames.net'],
         fail_silently=False,
     )
@@ -85,9 +85,10 @@ def send_recipe_as_email(recipe):
 
 def submit_recipe_view(request):
     # if this is a POST request we need to process the form data
+    errors=None
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -101,13 +102,15 @@ def submit_recipe_view(request):
                 ingredients=form.cleaned_data["ingredients"],
                 instructions=form.cleaned_data["instructions"],
                 cooking_time=form.cleaned_data["cooking_time"],
+                prep_time=form.cleaned_data["prep_time"],
+                image=form.cleaned_data["image"],
             )
             send_recipe_as_email(recipe)
             recipe.save()
             # Add additional tags
             split_tags = list(filter(None, additional_tags.split(",")))
             for t in split_tags:
-                tag = Tag(name=t.capitalize()) 
+                tag = Tag(name=t.lower()) 
                 tag.save()
                 recipe.tags.add(tag)
             # add existing tags
@@ -117,13 +120,18 @@ def submit_recipe_view(request):
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
         else:
+            errors=form.errors
+            print(form.errors)
             print("not valid")
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = RecipeForm()
+    if errors is not None:
+        return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':errors})
+    else:
+        return render(request, 'recipes/submit_recipe.html', {'form': form})
 
-    return render(request, 'recipes/submit_recipe.html', {'form': form})
 
 def detail_view(request, recipe_slug):
     """ Shows recipe in full """

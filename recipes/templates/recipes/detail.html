@@ -12,12 +12,17 @@
         {% endfor %}
     {% endif %}
     </div>
-        <h3>Description:</h3>
-        <p>{{recipe.description}}</p>
-        <h3>Ingredients:</h3>
-        <p>{{ recipe.ingredients|linebreaks }}</p>
-        <h3>Instructions:</h3>
-        <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
-<hr>
-<p style="text-align: center;"> Back to <a href="/">index</a>.</p>
+    <h3>Description:</h3>
+    <p>{{recipe.description}}</p>
+    <h3>Time:</h3>
+    <ul style="column-count: 1;">
+    <li>Prep time: <i>{{recipe.prep_time}} minutes</i></li>
+    <li>Cook time: <i>{{recipe.cooking_time}} minutes</i> </li>
+    </ul>
+    <h3>Ingredients:</h3>
+    <p>{{ recipe.ingredients|linebreaks }}</p>
+    <h3>Instructions:</h3>
+    <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
+    <hr>
+    <p style="text-align: center;"> Back to <a href="/">index</a>.</p>
 {% endblock %}

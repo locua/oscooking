@@ -38,7 +38,12 @@ class RecipeForm(forms.Form):
             'class': 'form-control'}
         )
     )
-    cooking_time = forms.IntegerField()
+    cooking_time = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'placeholder':'Cooking time in minutes'} )
+    )
+    prep_time = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'placeholder':'Preperation time in minutes'} )
+    )
 
     ingredients = forms.CharField(
         # max_length=200, 
@@ -68,6 +73,10 @@ class RecipeForm(forms.Form):
             'class':'form-control'}
         )
     )
+    image = forms.ImageField(
+        label="Optionally upload an image of the recipe...",
+        # required=False
+    )
 
-    from hcaptcha.fields import hCaptchaField
-    hcaptcha_field=hCaptchaField()
+    # from hcaptcha.fields import hCaptchaField
+    # hcaptcha_field=hCaptchaField()
