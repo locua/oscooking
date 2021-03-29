@@ -1,7 +1,7 @@
 server {
     listen 80;
-    server_name opensource.cooking;
-    #root /home/locua/oscooking;
+    server_name example.com;
+    #root /home/username/oscooking;
 
     #location / {
     #    include proxy_params;
@@ -9,15 +9,15 @@ server {
     #}
 
     location /media/ {
-	root /home/locua/oscooking;
+	root /home/username/oscooking;
     }
 
     location /static/ {
-	root /home/locua/oscooking;
+	root /home/username/oscooking;
     }
 
     #location /admin/ {
-    #    root /home/locua/.local/share/virtualenvs/locua-y5eUFHOJ/lib/python3.8/site-packages/django/contrib;
+    #    root /home/username/.local/share/virtualenvs/username-y5eUFHOJ/lib/python3.8/site-packages/django/contrib;
     #}
 
     location / {
@@ -30,21 +30,14 @@ server {
         proxy_read_timeout 10;
         proxy_pass http://127.0.0.1:8000/;
     }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/opensource.cooking/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/opensource.cooking/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
 }
 server {
-    if ($host = opensource.cooking) {
+    if ($host = example.com) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
     listen 80;
-    server_name opensource.cooking;
+    server_name example.com;
     return 404; # managed by Certbot
 }
