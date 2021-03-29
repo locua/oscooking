@@ -127,7 +127,9 @@ def submit_recipe_view(request):
             if img.size > 1*1024*1024: # limit upload size to 2mb
                 err_message = """<i><ul>
                 <li> Image is too large </li>
-                <li> Max size 1mb.</li></ul></i>
+                <li> Max size 1mb.</li>
+                <li> You could compress it using an online converter...</li>
+                </ul></i>
                 """
                 return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
 
