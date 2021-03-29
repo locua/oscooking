@@ -3,8 +3,8 @@
 <hr><h2>Submit a recipe</h2>
 <p style="text-align: center;">Recipes will be reviewed and added.</p>
 {% if errors %}
-<div style="border-style: groove; border-color: red; column-count: 1;">
-{{errors }}
+<div style=" border-style: solid; border-color: red; border-radius: 5px; border-width: 2px; column-count: 1;">
+{{errors|safe }}
 {% endif %}
 </div>
 <form action="/submit/" method="post" enctype="multipart/form-data">

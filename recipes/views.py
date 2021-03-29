@@ -123,8 +123,15 @@ def submit_recipe_view(request):
             )
             # convert image to webp and store
             img = request.FILES.get("image")
-            recipe.image = convert_to_webp(img)
+            print(img.size) # get size in bytes
+            if img.size > 1*1024*1024: # limit upload size to 2mb
+                err_message = """<i><ul>
+                <li> Image is too large </li>
+                <li> Max size 1mb.</li></ul></i>
+                """
+                return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
 
+            recipe.image = convert_to_webp(img)
             send_recipe_as_email(recipe)
             recipe.save()
             # Add additional tags
