@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	{%load static %}
-<!-- <img src="{% static 'recipes/ajvar.webp' %}" alt="" class="img-fluid mx-auto d-block rounded"> -->
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+{%load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}">
 </head>
 <body>
@@ -14,12 +13,10 @@
     <p class="st" style="/*text-align: center;*/">A diabolically simple site for finding and sharing recipes...a recipe site to end all recipe sites. Simply browse recipes by tag or search for ingredients and dishes. Submit your favourite recipe and it will be reviewed and added...</p>
     <h3 style="text-align: center;">🌰 🍇 🍏 🥔 🥩</h3>
   </div>
-<div class="container-fluid col-md-8" >
-<div class="px-3 py-3" >
     {% block content %}
     {% endblock %} 
-</div>
 <footer>
+<h1><a href="/">🧑‍🍳</a></h1>
 </footer>
 </body>
 </html>
