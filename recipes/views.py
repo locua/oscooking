@@ -122,18 +122,20 @@ def submit_recipe_view(request):
                 # image=form.cleaned_data["image"],
             )
             # convert image to webp and store
-            img = request.FILES.get("image")
-            print(img.size) # get size in bytes
-            if img.size > 1*1024*1024: # limit upload size to 2mb
-                err_message = """<i><ul>
-                <li> Image is too large </li>
-                <li> Max size 1mb.</li>
-                <li> You could compress it using an online converter...</li>
-                </ul></i>
-                """
-                return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
+            if request.FILES.get("image") is not None:
+                img = request.FILES.get("image")
+                 
+                print(img.size) # get size in bytes
+                if img.size > 1*1024*1024: # limit upload size to 2mb
+                    err_message = """<i><ul>
+                    <li> Image is too large </li>
+                    <li> Max size 1mb.</li>
+                    <li> You could compress it using an online converter...</li>
+                    </ul></i>
+                    """
+                    return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
 
-            recipe.image = convert_to_webp(img)
+                recipe.image = convert_to_webp(img)
             send_recipe_as_email(recipe)
             recipe.save()
             # Add additional tags
@@ -147,6 +149,17 @@ def submit_recipe_view(request):
                 recipe.tags.add(t)
             recipe.save()
             # redirect to a new URL:
+            if form.cleaned_data["email"]:
+                mess = """Thanks for submitting a recipe."""
+                send_mail(
+                    'OSCooking: New recipe by ' + recipe.author,
+                    mess,
+                    'contact@opensource.cooking',
+                    [form.cleaned_data["email"]],
+                    fail_silently=True,
+                )
+
+
             return HttpResponseRedirect('/thanks/')
         else:
             errors=form.errors
