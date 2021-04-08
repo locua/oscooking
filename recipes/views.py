@@ -82,7 +82,7 @@ def send_recipe_as_email(recipe):
         'OSCooking: New recipe by ' + recipe.author,
         message,
         'contact@opensource.cooking',
-        ['hi@louisjames.net'],
+        ['contact@opensource.cooking'],
         fail_silently=False,
     )
 
@@ -124,7 +124,7 @@ def submit_recipe_view(request):
             # convert image to webp and store
             if request.FILES.get("image") is not None:
                 img = request.FILES.get("image")
-                 
+
                 print(img.size) # get size in bytes
                 if img.size > 1*1024*1024: # limit upload size to 2mb
                     err_message = """<i><ul>
