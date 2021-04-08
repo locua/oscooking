@@ -123,7 +123,6 @@ def submit_recipe_view(request):
             )
             # convert image to webp and store
             if request.FILES.get("image") is not None:
-
                 img = request.FILES.get("image")
                 print(img.size) # get size in bytes
                 if img.size > 1*1024*1024: # limit upload size to 2mb
@@ -134,7 +133,6 @@ def submit_recipe_view(request):
                     </ul></i>
                     """
                     return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
-    
                 recipe.image = convert_to_webp(img)
             send_recipe_as_email(recipe)
             recipe.save()
@@ -149,6 +147,17 @@ def submit_recipe_view(request):
                 recipe.tags.add(t)
             recipe.save()
             # redirect to a new URL:
+            if form.cleaned_data["email"]:
+                mess = """Thanks for submitting a recipe."""
+                send_mail(
+                    'OSCooking: New recipe by ' + recipe.author,
+                    mess,
+                    'contact@opensource.cooking',
+                    [form.cleaned_data["email"]],
+                    fail_silently=True,
+                )
+
+
             return HttpResponseRedirect('/thanks/')
         else:
             errors=form.errors

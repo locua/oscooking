@@ -4,6 +4,7 @@
 <title>Open source cooking</title>
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 {%load static %}
+<link rel='icon' href='{% static "recipes/favicon.ico" %}' type ="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}">
 </head>
 <body>
@@ -17,7 +18,9 @@
     {% block content %}
     {% endblock %} 
 <footer>
-<h1><a href="/">🧑‍🍳</a></h1>
+<h1><a href="/">🧑‍🍳</a><a href="https://github.com/locua/oscooking">🍅</a></h1>
+<p class="st"> Click the tomato to see the source code for this website.</p>
+<h1></h1>
 </footer>
 </body>
 </html>
