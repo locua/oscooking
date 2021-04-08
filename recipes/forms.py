@@ -78,5 +78,5 @@ class RecipeForm(forms.Form):
         required=False
     )
 
-    # from hcaptcha.fields import hCaptchaField
-    # hcaptcha_field=hCaptchaField()
+    from hcaptcha.fields import hCaptchaField
+    hcaptcha_field=hCaptchaField()

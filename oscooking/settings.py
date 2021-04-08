@@ -36,9 +36,11 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASS")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
+#DEBUG = True
 
-ALLOWED_HOSTS = [ "opensource.cooking", "127.0.0.1", "localhost"]
+#ALLOWED_HOSTS = [ "opensource.cooking", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ['*']
 
 #hcaptcha stuff
 HCAPTCHA_SITEKEY = env("HCAPTCHA_SITE_KEY")
@@ -65,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'oscooking.urls'
@@ -147,12 +150,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static/')
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-#     '/var/www/static/',
-# ]
+#STATICFILES_DIRS = [
+#     #BASE_DIR / "static",
+#     '/home/locua/oscooking/recipes/static',
+#     '/home/locua/.local/share/virtualenvs/locua-y5eUFHOJ/lib/python3.8/site-packages/django/contrib/admin/static'
+#]
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
