@@ -124,7 +124,10 @@ def submit_recipe_view(request):
             # convert image to webp and store
             if request.FILES.get("image") is not None:
                 img = request.FILES.get("image")
+<<<<<<< HEAD
 
+=======
+>>>>>>> eeec29b42e96c50d596133c6a94080447eec039a
                 print(img.size) # get size in bytes
                 if img.size > 1*1024*1024: # limit upload size to 2mb
                     err_message = """<i><ul>
@@ -134,7 +137,6 @@ def submit_recipe_view(request):
                     </ul></i>
                     """
                     return render(request, 'recipes/submit_recipe.html', {'form': form, 'errors':err_message})
-
                 recipe.image = convert_to_webp(img)
             send_recipe_as_email(recipe)
             recipe.save()
