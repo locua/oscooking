@@ -46,9 +46,9 @@ class Recipe(models.Model):
 
   def save(self, *args, **kwargs):
     # create slug from title
-    if len(self.title)>=50:
-      mySlug = ran_string(5)+slugify(self.title[:30])+ran_string(5)
-      self.recipe_slug =  mySlug or self.recipe_slug 
+    # if len(self.title)>=50:
+    mySlug = ran_string(5)+slugify(self.title[:30])+ran_string(5)
+    self.recipe_slug =  mySlug or self.recipe_slug 
     else:
       mySlug = ran_string(5)+slugify(self.title)+ran_string(5)
       self.recipe_slug =  mySlug or self.recipe_slug 
