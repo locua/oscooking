@@ -24,7 +24,8 @@
     <h3>Ingredients:</h3>
     <p>{{ recipe.ingredients|linebreaks }}</p>
     <h3>Instructions:</h3>
-    <p>{{ recipe.instructions|linenumbers|linebreaks }}</p>
+    <div style="line-height:200%; display:block;">{{ recipe.instructions|linenumbers|linebreaks}}</div>
+    <!-- <div style="display:block; line-height: 2em;">{{ recipe.instructions|unordered_list}}</div> -->
     {% if recipe.image %}
     <img style="max-height: 40em;width:auto" src="{{recipe.image.url}}">
     <br>

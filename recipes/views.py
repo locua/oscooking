@@ -83,7 +83,7 @@ def send_recipe_as_email(recipe):
         'OSCooking: New recipe by ' + recipe.author,
         message,
         'contact@opensource.cooking',
-        ['hi@louisjames.net'],
+        ['contact@opensource.cooking'],
         fail_silently=False,
     )
 
