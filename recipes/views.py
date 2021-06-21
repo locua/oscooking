@@ -75,7 +75,8 @@ def send_recipe_as_email(recipe):
     message = (recipe.title + 
                 "\n by " + recipe.author + "\n---DESCRIPTION:-\n"+
                 recipe.description + "\n---INGREDIENTS:-\n" + 
-                recipe.ingredients + "\n---METHOD:-\n" + 
+                recipe.ingredients + "\n---Email:-\n" + 
+                recipe.email + "\n---METHOD:-\n" + 
                 recipe.instructions)
     # Send email
     send_mail(

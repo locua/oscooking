@@ -39,7 +39,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEBUG = False 
 #DEBUG = True
 
-#ALLOWED_HOSTS = [ "opensource.cooking", "127.0.0.1", "localhost"]
 ALLOWED_HOSTS = ['*']
 
 #hcaptcha stuff
